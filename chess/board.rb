@@ -1,19 +1,27 @@
 require 'byebug'
 require_relative 'piece'
 require_relative 'nullpiece'
+require_relative 'display'
 
 class Board
+  attr_reader :board
 
   def initialize
     @board = Array.new(8) { Array.new(8, "") }
+    populate_board
   end
 
   def populate_board
     populate_first_last(0, "white")
-    populate_first_last(7, "black")
     populate_pawns(1, "white")
     populate_pawns(6, "black")
+    populate_first_last(7, "black")
     populate_nullpieces
+  end
+
+  def render_board
+    @display = Display.new(self)
+    @display.display
   end
 
   def populate_first_last(row, color)
@@ -60,4 +68,9 @@ class Board
     end
   end
 
+end
+
+if __FILE__ == $PROGRAM_NAME
+  game = Board.new
+  game.render_board
 end
