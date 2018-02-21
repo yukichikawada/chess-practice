@@ -3,7 +3,7 @@ require_relative 'board'
 require_relative 'cursor'
 
 class Display
-  attr_reader :cursor
+  attr_reader :cursor, :board
 
   def initialize(board)
     @board = board
@@ -23,8 +23,8 @@ class Display
       puts
       puts
     end
-    @cursor.get_input
-    display
+    # @cursor.get_input
+    # display
   end
 
 end
